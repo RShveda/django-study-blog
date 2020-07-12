@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 BLOG_DIR = os.path.join(BASE_DIR, "blog/templates/blog")
+ACCOUNTS_DIR = os.path.join(BASE_DIR, "blog/templates/accounts")
 
 
 # Quick-start development settings - unsuitable for production
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'django_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR, BLOG_DIR],
+        'DIRS': [TEMPLATES_DIR, BLOG_DIR, ACCOUNTS_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,6 +105,10 @@ AUTH_PASSWORD_VALIDATORS = [
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
 ]
+
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "blog:login"
+LOGOUT_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
