@@ -22,6 +22,10 @@ app_name = "blog"
 
 urlpatterns = [
     path('', views.PostListView.as_view(), name='post_list'),
+    path('posts/new', views.PostCreateView.as_view(), name='post_create'),
+    path('posts/edit/<pk>', views.PostUpdateView.as_view(), name='post_edit'),
+    path('posts/delete/<pk>', views.PostDeleteView.as_view(), name='post_delete'),
+    path('posts/<pk>', views.PostDetailView.as_view(), name='post_details'),
     path('about/', views.about, name='about'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html'), name = "login"),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name = "logout"),

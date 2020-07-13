@@ -16,7 +16,7 @@ class BlogPost (models.Model):
         return self.published_at
 
     def get_absolute_url(self):
-        return reverse('blog:blogpost', args=[str(self.id)])
+        return reverse('blog:post_details', args=[str(self.id)])
 
     def __str__(self):
         return self.title
@@ -29,7 +29,7 @@ class PostComment (models.Model):
     created_at = models.DateTimeField(default=timezone.now)
 
     def get_absolute_url(self):
-        return reverse('blog:comment', args=[str(self.id)])
+        return reverse('blog:comment_details', args=[str(self.id)])
 
     def __str__(self):
-        return self.text
+        return self.comment_text
