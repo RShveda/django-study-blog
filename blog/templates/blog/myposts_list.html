@@ -2,8 +2,13 @@
 {% block body_block%}
   <h1>My Posts!</h1>
   {% for blog in blogpost_list%}
-  <p>{{blog}}</p>
+  {% if blog.published_at %}
+  <p>Published</p>
+  {% else %}
+  <p>Draft</p>
+  {% endif %}
 
+  <p>{{blog}}</p>
 
   {% endfor %}
 {% endblock body_block %}
