@@ -5,12 +5,23 @@ from blog.models import BlogPost, PostComment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from django.shortcuts import render
+
 
 # Create your views here.
 # @login_required
 def about(request):
     return render(request, "about.html")
+
+def publish_post(request, **kwargs):
+    id = kwargs["pk"]
+    post = BlogPost.objects.get(id=id)
+    post.publish()    
+    post.save()
+    return render (request, "blogpost_publish.html", context={"id":id})
+
 
 class UserCreateView(CreateView):
     form_class = UserCreationForm
@@ -21,6 +32,14 @@ class UserCreateView(CreateView):
 
 class PostListView(ListView):
     model = BlogPost
+
+class MyPostsListView(ListView):
+    model = BlogPost
+    template_name = 'myposts_list.html'
+
+    def get_queryset(self):
+        self.author = get_object_or_404(User, username = self.request.user.username)
+        return BlogPost.objects.filter(author=self.author)
 
 class PostCreateView(CreateView):
     model = BlogPost
@@ -67,7 +86,6 @@ class CommentUpdateView(UpdateView):
 
 class CommentDeleteView(DeleteView):
     model = PostComment
-    # success_url = reverse_lazy('blog:post_details', args = [])
     def get_success_url(self):
         success_url = reverse_lazy('blog:post_details', args = [self.object.post.pk])
         return success_url

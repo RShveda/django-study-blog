@@ -22,6 +22,8 @@ app_name = "blog"
 
 urlpatterns = [
     path('', views.PostListView.as_view(), name='post_list'),
+    path('posts/publish/<pk>', views.publish_post, name='post_publish'),
+    path('myposts/', views.MyPostsListView.as_view(), name='mypost_list'),
     path('posts/new', views.PostCreateView.as_view(), name='post_create'),
     path('posts/edit/<pk>', views.PostUpdateView.as_view(), name='post_edit'),
     path('posts/delete/<pk>', views.PostDeleteView.as_view(), name='post_delete'),

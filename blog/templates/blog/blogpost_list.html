@@ -3,5 +3,9 @@
   <h1>Welcome to the Blog!</h1>
   {% for blog in blogpost_list%}
   <p>{{blog}}</p>
+  <p>{{blog.id}}</p>
+  <p>Published at: {{blog.published_at|date:"H:i d/m/Y"}}</p>
+
+  <a href="{% url "blog:post_publish" blog.id %}"><button type="button" name="button">Publish</button></a>
   {% endfor %}
 {% endblock body_block %}
