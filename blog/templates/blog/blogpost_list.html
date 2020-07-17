@@ -2,10 +2,17 @@
 {% block body_block%}
   <h1>Welcome to the Blog!</h1>
   {% for blog in blogpost_list%}
-  <p>{{blog}}</p>
-  <p>{{blog.id}}</p>
-  <p>Published at: {{blog.published_at|date:"H:i d/m/Y"}}</p>
+  <!-- for admin user we show all posts published and not_publushed, for author we show all published + his/her not published -->
+    {% if blog.published_at or user.is_superuser or blog.author == user %}
+      <p>{{blog.title}}</p>
+      <p>{{blog.body}}</p>
+      <p>{{blog.id}}</p>
+      <p>Published at: {{blog.published_at|date:"H:i d/m/Y"}}</p>
+      <!-- Only admin can publish drafts -->
+      {% if not blog.published_at and user.is_superuser %}
+        <a href="{% url "blog:post_publish" blog.id %}"><button type="button" name="button">Publish</button></a>
+      {% endif %}
+    {% endif %}
 
-  <a href="{% url "blog:post_publish" blog.id %}"><button type="button" name="button">Publish</button></a>
   {% endfor %}
 {% endblock body_block %}

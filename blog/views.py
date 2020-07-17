@@ -15,10 +15,11 @@ from django.shortcuts import render
 def about(request):
     return render(request, "about.html")
 
+@login_required
 def publish_post(request, **kwargs):
     id = kwargs["pk"]
     post = BlogPost.objects.get(id=id)
-    post.publish()    
+    post.publish()
     post.save()
     return render (request, "blogpost_publish.html", context={"id":id})
 
