@@ -1,8 +1,40 @@
-h1 {
-  color: red;
-  font-family: 'Play', sans-serif;
+body {
+  background-color: #DAE0E6;
 }
 
-p {
+.navbar-container {
+  font-family: 'Play', sans-serif;
+  font-size: 1.3em;
+}
+
+.navbar-brand{
+  font-size: 1.3em;
+}
+
+.blogbody {
   font-family: 'Noto Serif JP', serif;
+}
+
+/* make div clickable */
+.postcard, .postcard:hover, .postcard:focus {
+    text-decoration: none;
+    color: inherit;
+}
+
+.postcard{
+  display: inline-block;
+  width: 75%;
+}
+
+.card {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.publishedBtn {
+  float:right;
+}
+
+.card:hover {
+    border: black solid 1px;
 }

@@ -1,17 +1,34 @@
 {% extends "blog_base.html" %}
 {% block body_block%}
+{% load static %}
   <h1>Welcome to the Blog!</h1>
   {% for blog in blogpost_list%}
-  <!-- for admin user we show all posts published and not_publushed, for author we show all published + his/her not published -->
+  <!-- for admin user we show all posts published and not_published, for author we show all published + his/her not published -->
     {% if blog.published_at or user.is_superuser or blog.author == user %}
-      <p>{{blog.title}}</p>
-      <p>{{blog.body}}</p>
-      <p>{{blog.id}}</p>
-      <p>Published at: {{blog.published_at|date:"H:i d/m/Y"}}</p>
-      <!-- Only admin can publish drafts -->
-      {% if not blog.published_at and user.is_superuser %}
-        <a href="{% url "blog:post_publish" blog.id %}"><button type="button" name="button">Publish</button></a>
-      {% endif %}
+      <a class="postcard" href="{% url "blog:post_details" blog.id %}">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-subtitle small mb-2 text-muted">
+              <span>Created by {{blog.author}} at: {{blog.published_at|date:"H:i d/m/Y"}}</span>
+              <span class="publishedBtn">
+                <!-- "My Post" badge -->
+                {% if blog.author == user %}
+                  <span class="badge badge-info">My Post</span>
+                {% endif %}
+                <!-- Only admin can publish drafts -->
+                {% if not blog.published_at and user.is_superuser %}
+                  <button type="button" class="btn btn-sm btn-outline-secondary" href="{% url "blog:post_publish" blog.id %}">Publish</button>
+                {% elif not blog.published_at %}
+                  <span class="badge badge-pill badge-light">Pending</span>
+                {% endif %}
+              </span>
+            </p>
+            <h5 class="card-title">{{blog.title}}</h5>
+            <p class="card-text">{{blog.body_text|truncatechars_html:320}}</p>
+            <p class="card-subtitle small text-muted"> {{blog.comments.count}} Comments</p>
+          </div>
+        </div>
+      </a>
     {% endif %}
 
   {% endfor %}
