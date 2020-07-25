@@ -1,7 +1,67 @@
 {% extends "blog_base.html" %}
 {% block body_block%}
-  <h1>Post detail view</h1>
-  <p>{{object.title}}</p>
-  <p>{{object.body_text}}</p>
-  <p>{{object.comments.all}}</p>
+    <div class="card">
+    <div class="card-body">
+      <p class="card-subtitle small mb-2 text-muted">
+        <span>Created by {{object.author}}
+          {% if object.published_at %}
+            at: {{object.published_at|date:"H:i d/m/Y"}}
+          {% endif %}
+        </span>
+        <span class="publishedBtn">
+          <!-- "My Post" badge -->
+          {% if object.author == user %}
+            <span class="badge badge-info">My Post</span>
+          {% endif %}
+          <!-- Only admin can publish drafts -->
+          {% if not object.published_at and user.is_superuser %}
+            <button type="button" class="btn btn-sm btn-outline-secondary" href="{% url "blog:post_publish" object.id %}">Publish</button>
+          {% elif not object.published_at %}
+            <span class="badge badge-pill badge-light">Pending</span>
+          {% endif %}
+        </span>
+      </p>
+      <h1 class="card-title">{{object.title}}</h1>
+      {% autoescape off %}
+        <p class="card-text">{{object.body_text}}</p>
+      {% endautoescape %}
+      <!-- <p class="card-subtitle small text-muted"> {{object.comments.count}} Comments</p> -->
+    </div>
+    <ul class="list-group list-group-flush">
+      {% for comment in object.comments.all %}
+
+      <li class="list-group-item">
+        <p class="card-subtitle small mb-2 text-muted">
+          <span>Commented by {{comment.author}}
+              at: {{comment.created_at|date:"H:i d/m/Y"}}
+          </span>
+        </p>
+        <div class="comment">
+          {% autoescape off %}
+          {{comment}}
+          {% endautoescape %}
+        </div>
+
+      </li>
+      {% endfor %}
+
+      <!-- Mock div for New Comments form -->
+      <li class="list-group-item">
+        <p class="card-subtitle small mb-2 text-muted">
+          <span> Add a comment</span>
+        </p>
+        <div class="comment">
+          <form class="" action="index.html" method="post">
+            {%csrf_token%}
+            <textarea name="name" rows="8" cols="80" placeholder="just a mockup form"></textarea>
+            <input type="submit" name="" value="Save">
+          </form>
+        </div>
+
+      </li>
+    </ul>
+
+  </div>
+
+
 {% endblock body_block %}

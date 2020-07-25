@@ -57,7 +57,7 @@ class PostDetailView(DetailView):
 
 class PostUpdateView(UpdateView):
     model = BlogPost
-    fields = ["title", "body_text"]
+    form_class = BlogPostForm
 
 class PostDeleteView(DeleteView):
     model = BlogPost
