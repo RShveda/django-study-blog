@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.shortcuts import render
+from django.forms import Textarea
+from blog.forms import BlogPostForm
 
 
 # Create your views here.
@@ -44,7 +46,7 @@ class MyPostsListView(ListView):
 
 class PostCreateView(CreateView):
     model = BlogPost
-    fields = ["title", "body_text"]
+    form_class = BlogPostForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user

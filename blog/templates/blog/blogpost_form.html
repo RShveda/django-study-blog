@@ -1,9 +1,18 @@
 {% extends "blog_base.html" %}
 {% block body_block%}
   <h1>Create/edit a blogpost!</h1>
+
   <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    
+    <div class="card editor-area">
+      <div class="card-body">
+        <h5 class="card-title editor-title">{{ form.title }}</h5>
+        {{ form.body_text}}
+      </div>
+    </div>
     <input type="submit" value="Save">
-</form>
+  </form>
+
+
 {% endblock body_block %}

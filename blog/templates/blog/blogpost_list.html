@@ -9,7 +9,11 @@
         <div class="card">
           <div class="card-body">
             <p class="card-subtitle small mb-2 text-muted">
-              <span>Created by {{blog.author}} at: {{blog.published_at|date:"H:i d/m/Y"}}</span>
+              <span>Created by {{blog.author}}
+                {% if blog.published_at %}
+                  at: {{blog.published_at|date:"H:i d/m/Y"}}
+                {% endif %}
+              </span>
               <span class="publishedBtn">
                 <!-- "My Post" badge -->
                 {% if blog.author == user %}

@@ -2,13 +2,33 @@
 {% block body_block%}
   <h1>My Posts!</h1>
   {% for blog in blogpost_list%}
-  {% if blog.published_at %}
-  <p>Published</p>
-  {% else %}
-  <p>Draft</p>
-  {% endif %}
-
-  <p>{{blog}}</p>
+    <a class="postcard" href="{% url "blog:post_details" blog.id %}">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-subtitle small mb-2 text-muted">
+            <span>Created by {{blog.author}}
+              {% if blog.published_at %}
+                at: {{blog.published_at|date:"H:i d/m/Y"}}
+              {% endif %}
+            </span>
+            <span class="publishedBtn">
+              {% if blog.published_at %}
+                <span class="badge badge-info">Published</span>
+              {% else %}
+                <span class="badge badge-warning">Pending</span>
+                {% if user.is_superuser %}
+                  <button type="button" class="btn btn-sm btn-outline-secondary" href="{% url "blog:post_publish" blog.id %}">Publish</button>
+                {% endif %}
+              {% endif %}
+              <!-- Only admin can publish drafts -->
+            </span>
+          </p>
+          <h5 class="card-title">{{blog.title}}</h5>
+          <p class="card-text">{{blog.body_text|truncatechars_html:320}}</p>
+          <p class="card-subtitle small text-muted"> {{blog.comments.count}} Comments</p>
+        </div>
+      </div>
+    </a>
 
   {% endfor %}
 {% endblock body_block %}
