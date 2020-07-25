@@ -70,7 +70,6 @@ class CommentCreateView(CreateView):
     fields = ["comment_text"]
 
     def form_valid(self, form):
-        # TODO add Post relation here
         form.instance.author = self.request.user
         form.instance.post = get_object_or_404(BlogPost, id=self.kwargs['post'])
         return super().form_valid(form)

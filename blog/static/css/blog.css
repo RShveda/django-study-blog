@@ -29,13 +29,20 @@ h1{
     outline: 0px solid transparent;
 }
 
-
 .editor-area {
   background-color: white;
   width: 75%;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid black;
+}
+
+.comment-editor-area {
+  background-color: white;
+  width: 75%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #6c757d78;
 }
 
 .editor-title {

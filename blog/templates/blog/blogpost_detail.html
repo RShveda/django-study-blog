@@ -42,19 +42,29 @@
           {% endautoescape %}
         </div>
 
+            <i class="fas fa-align-right"></i>
+            <i class="fas fa-clock"></i>
+            <i class="far fa-trash-alt"></i>
+
+            <button class="btn btn-outline-danger">Delete</button>
+
       </li>
       {% endfor %}
 
-      <!-- Mock div for New Comments form -->
+      <!-- New Comments form -->
       <li class="list-group-item">
-        <p class="card-subtitle small mb-2 text-muted">
-          <span> Add a comment</span>
+        <p class="card-subtitle mb-2 ">
+          <span> Add your comment </span>
         </p>
         <div class="comment">
-          <form class="" action="index.html" method="post">
+          <form class="" action="{% url "blog:comment_create" object.id %}" method="post">
             {%csrf_token%}
-            <textarea name="name" rows="8" cols="80" placeholder="just a mockup form"></textarea>
-            <input type="submit" name="" value="Save">
+            <div class="card comment-editor-area">
+              <div class="card-body">
+                  <textarea class = "editable medium-editor-textarea" name="comment_text" rows="8" cols="80" placeholder="just a mockup form"></textarea>
+              </div>
+            </div>
+            <input type="submit" value="Save">
           </form>
         </div>
 
