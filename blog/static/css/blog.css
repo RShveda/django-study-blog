@@ -67,11 +67,28 @@ h1{
   margin-bottom: 15px;
 }
 
-.publishedBtn {
+.published-btn {
   float:right;
   font-size: 1.2em;
 }
 
 .list-card:hover {
   border: black solid 1px;
+}
+
+.comment-toolbar{
+  margin-top: 15px;
+}
+
+.comment-toolbar-options{
+  padding: 2px 3px 4px 4px;
+  margin: 1px;
+  border-radius: 2px;
+  color: #6c757d;
+}
+
+.comment-toolbar-options:hover{
+  text-decoration: none;
+  color:inherit;
+  background-color: #6c757d36;
 }
