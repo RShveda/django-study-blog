@@ -5,9 +5,13 @@
   {% for blog in blogpost_list%}
   <!-- for admin user we show all posts published and not_published, for author we show all published + his/her not published -->
     {% if blog.published_at or user.is_superuser or blog.author == user %}
-      <a class="postcard" href="{% url "blog:post_details" blog.id %}">
-        <div class="card list-card">
-          <div class="card-body">
+
+      <div class="card list-card">
+
+
+        <div class="card-body">
+          <!-- CLICKABLE CARD BODY -->
+          <a class="postcard" href="{% url "blog:post_details" blog.id %}">
             <p class="card-subtitle small mb-2 text-muted">
               <span>Created by {{blog.author}}
                 {% if blog.published_at %}
@@ -31,10 +35,28 @@
             {% autoescape off %}
               <p class="card-text">{{blog.body_text|truncatechars_html:320}}</p>
             {% endautoescape %}
-            <p class="card-subtitle small text-muted"> {{blog.comments.count}} Comments</p>
+          </a>
+
+
+          <!-- CARD TOOLBAR-->
+          <div class="small mb-2 text-muted card-toolbar">
+            <span class="card-subtitle">{{blog.comments.count}} Comments</span>
+            <!-- <p class="card-subtitle small text-muted"> {{blog.comments.count}} Comments</p> -->
+            {% if blog.author == user %}
+
+            <a class="card-toolbar-options" href="#">
+              <i class="far fa-edit"></i>
+              <span>Edit</span>
+            </a>
+            <a class="card-toolbar-options" href="#">
+              <i class="far fa-trash-alt"></i>
+              <span>Delete</span>
+            </a>
+            {% endif %}
           </div>
+
         </div>
-      </a>
+      </div>
     {% endif %}
 
   {% endfor %}

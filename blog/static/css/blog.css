@@ -57,10 +57,10 @@ h1{
   outline: 0px solid transparent;
 }
 
-.postcard {
+/* .postcard {
   display: inline-block;
   width: 75%;
-}
+} */
 
 .card {
   margin-top: 15px;
@@ -72,22 +72,26 @@ h1{
   font-size: 1.2em;
 }
 
+.list-card{
+  width: 75%;
+}
+
 .list-card:hover {
   border: black solid 1px;
 }
 
-.comment-toolbar{
+.card-toolbar{
   margin-top: 15px;
 }
 
-.comment-toolbar-options{
+.card-toolbar-options{
   padding: 2px 3px 4px 4px;
   margin: 1px;
   border-radius: 2px;
   color: #6c757d;
 }
 
-.comment-toolbar-options:hover{
+.card-toolbar-options:hover{
   text-decoration: none;
   color:inherit;
   background-color: #6c757d36;

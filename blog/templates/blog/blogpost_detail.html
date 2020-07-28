@@ -50,16 +50,18 @@
           {% endautoescape %}
         </div>
 
+
+        <!-- TOOLBAR -->
         <!-- Comment owner and post author can get access to comment tollbar -->
         {% if comment.author == user or object.author == user %}
-        <div class="small mb-2 text-muted comment-toolbar">
+        <div class="small mb-2 text-muted card-toolbar">
           {% if comment.author == user %}
-          <a class="comment-toolbar-options" href="{% url "blog:comment_edit" comment.id %}">
+          <a class="card-toolbar-options" href="{% url "blog:comment_edit" comment.id %}">
             <i class="far fa-edit"></i>
             <span>Edit</span>
           </a>
           {% endif %}
-          <a class="comment-toolbar-options" href="{% url "blog:comment_delete" comment.id %}">
+          <a class="card-toolbar-options" href="{% url "blog:comment_delete" comment.id %}">
             <i class="far fa-trash-alt"></i>
             <span>Delete</span>
           </a>
