@@ -18,16 +18,12 @@
                   at: {{blog.published_at|date:"H:i d/m/Y"}}
                 {% endif %}
               </span>
-              <span class="published-btn">
+              <span class="badges-area">
                 <!-- "My Post" badge -->
-                {% if blog.author == user %}
+                {% if blog.author == user and blog.published_at %}
                   <span class="badge badge-info">My Post</span>
-                {% endif %}
-                <!-- Only admin can publish drafts -->
-                {% if not blog.published_at and user.is_superuser %}
-                  <button type="button" class="btn btn-sm btn-outline-secondary" href="{% url "blog:post_publish" blog.id %}">Publish</button>
                 {% elif not blog.published_at %}
-                  <span class="badge badge-pill badge-light">Pending</span>
+                  <span class="badge badge-pill badge-warning">Pending</span>
                 {% endif %}
               </span>
             </p>
@@ -44,14 +40,22 @@
             <!-- <p class="card-subtitle small text-muted"> {{blog.comments.count}} Comments</p> -->
             {% if blog.author == user %}
 
-            <a class="card-toolbar-options" href="#">
+            <a class="card-toolbar-options" href="{% url "blog:post_edit" blog.id %}">
               <i class="far fa-edit"></i>
               <span>Edit</span>
             </a>
-            <a class="card-toolbar-options" href="#">
+            <a class="card-toolbar-options" href="{% url "blog:post_delete" blog.id %}">
               <i class="far fa-trash-alt"></i>
               <span>Delete</span>
             </a>
+
+            {% endif %}
+            <!-- Only admin can publish drafts -->
+            {% if not blog.published_at and user.is_superuser %}
+              <a class="card-toolbar-options publish-btn" href="{% url "blog:post_publish" blog.id %}">
+                <i class="fas fa-check"></i>
+                <span>Publish</span>
+              </a>
             {% endif %}
           </div>
 

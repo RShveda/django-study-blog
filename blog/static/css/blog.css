@@ -67,9 +67,12 @@ h1{
   margin-bottom: 15px;
 }
 
-.published-btn {
+.badges-area {
   float:right;
-  font-size: 1.2em;
+}
+
+.publish-btn {
+  float:right;
 }
 
 .list-card{
