@@ -1,21 +1,28 @@
 {% extends "blog_base.html" %}
 {% block body_block %}
   <h1>This is login page</h1>
-  <form method="post" action="{% url 'blog:login' %}">
-  {% csrf_token %}
-  <table>
-  <tr>
-      <td>{{ form.username.label_tag }}</td>
-      <td>{{ form.username }}</td>
-  </tr>
-  <tr>
-      <td>{{ form.password.label_tag }}</td>
-      <td>{{ form.password }}</td>
-  </tr>
-  </table>
+  <div class="card">
+    <div class="card-body">
+      <form method="post" action="{% url 'blog:login' %}">
+          {% csrf_token %}
+          <table>
+          <tr>
+              <td>{{ form.username.label_tag }}</td>
+              <td>{{ form.username }}</td>
+          </tr>
+          <tr>
+              <td>{{ form.password.label_tag }}</td>
+              <td>{{ form.password }}</td>
+          </tr>
+          </table>
 
-  <input type="submit" value="login">
-  <input type="hidden" name="next" value="{{ next }}">
-  </form>
+
+          <input class="btn btn-outline-primary btn-sm" type="submit" value="Login">
+          <input type="hidden" name="next" value="{{ next }}">
+      </form>
+
+    </div>
+  </div>
+
 
 {% endblock body_block %}
