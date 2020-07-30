@@ -12,3 +12,11 @@ class BlogPostForm (ModelForm):
                 'title': TextInput(attrs={'class': "title-input", "placeholder":"Title"}),
                 'body_text': Textarea(attrs={'class': "editable medium-editor-textarea", "cols":1, "rows": 1}),
             }
+
+class PostCommentForm (ModelForm):
+    class Meta:
+        model = PostComment
+        fields = ("comment_text",)
+        widgets = {
+                'comment_text': Textarea(attrs={'class': "editable medium-editor-textarea", "cols":1, "rows": 1}),
+            }

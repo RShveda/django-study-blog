@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.forms import Textarea
-from blog.forms import BlogPostForm
+from blog.forms import BlogPostForm, PostCommentForm
 
 
 # Create your views here.
@@ -67,7 +67,7 @@ class PostDeleteView(DeleteView):
 # Comment views
 class CommentCreateView(CreateView):
     model = PostComment
-    fields = ["comment_text"]
+    form_class = PostCommentForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -80,7 +80,7 @@ class CommentCreateView(CreateView):
 
 class CommentUpdateView(UpdateView):
     model = PostComment
-    fields = ["comment_text"]
+    form_class = PostCommentForm
 
     def get_success_url(self):
         success_url = reverse_lazy('blog:post_details', args = [self.object.post.pk])

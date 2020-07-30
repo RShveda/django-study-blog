@@ -1,9 +1,21 @@
 {% extends "blog_base.html" %}
 {% block body_block%}
   <h1>Create/edit a comment!</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+
+  <div class="comment">
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="card comment-editor-area">
+        <div class="card-body">
+            {{form.comment_text}}
+        </div>
+      </div>
+      <input type="submit" value="Save">
+    </form>
+
+  </div>
+
+
+
 {% endblock body_block %}
