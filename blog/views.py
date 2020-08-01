@@ -32,11 +32,12 @@ class UserCreateView(CreateView):
     success_url = "/"
 
 # Post views
-
 class PostListView(ListView):
+    paginate_by = 10
     model = BlogPost
 
 class MyPostsListView(ListView):
+    paginate_by = 10
     model = BlogPost
     template_name = 'myposts_list.html'
 

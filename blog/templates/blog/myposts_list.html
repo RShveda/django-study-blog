@@ -2,11 +2,9 @@
 {% load blog_extras %}
 {% block body_block%}
   <h1>My Posts!</h1>
-  {% for blog in blogpost_list%}
 
+  {% for blog in page_obj%}
     <div class="card list-card">
-
-
       <div class="card-body">
         <!-- CLICKABLE CARD BODY -->
         <a class="postcard" href="{% url "blog:post_details" blog.id %}">
@@ -24,7 +22,6 @@
                 <span class="badge badge-warning">Pending</span>
               {% endif %}
             </span>
-
           </p>
           <h5 class="card-title">{{blog.title}}</h5>
           {% autoescape off %}
@@ -64,4 +61,23 @@
   {% if not blogpost_list %}
     <p>No Posts here yet. You can create the first one.</p>
   {% endif %}
+
+  <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+  
 {% endblock body_block %}
