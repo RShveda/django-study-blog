@@ -5,6 +5,7 @@ from django.urls import reverse
 # Create your models here.
 
 class BlogPost (models.Model):
+    
     title = models.CharField(max_length = 128)
     body_text = models.TextField()
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

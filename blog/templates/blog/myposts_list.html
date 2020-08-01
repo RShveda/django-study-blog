@@ -1,4 +1,5 @@
 {% extends "blog_base.html" %}
+{% load blog_extras %}
 {% block body_block%}
   <h1>My Posts!</h1>
   {% for blog in blogpost_list%}
@@ -48,7 +49,7 @@
 
           {% endif %}
           <!-- Only admin can publish drafts -->
-          {% if not blog.published_at and user.is_superuser %}
+          {% if not blog.published_at and user|has_group:"blog_editors" %}
             <a class="card-toolbar-options publish-btn" href="{% url "blog:post_publish" blog.id %}">
               <i class="fas fa-check"></i>
               <span>Publish</span>
@@ -60,4 +61,7 @@
     </div>
 
   {% endfor %}
+  {% if not blogpost_list %}
+    <p>No Posts here yet. You can create the first one.</p>
+  {% endif %}
 {% endblock body_block %}

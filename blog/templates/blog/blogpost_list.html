@@ -1,10 +1,11 @@
 {% extends "blog_base.html" %}
+{% load blog_extras %}
 {% block body_block%}
-{% load static %}
+
   <h1>Welcome to the Blog!</h1>
   {% for blog in blogpost_list%}
   <!-- for admin user we show all posts published and not_published, for author we show all published + his/her not published -->
-    {% if blog.published_at or user.is_superuser or blog.author == user %}
+    {% if blog.published_at or user|has_group:"blog_editors" or blog.author == user %}
 
       <div class="card list-card">
 
@@ -37,8 +38,8 @@
           <!-- CARD TOOLBAR-->
           <div class="small mb-2 text-muted card-toolbar">
             <span class="card-subtitle">{{blog.comments.count}} Comments</span>
-            <!-- <p class="card-subtitle small text-muted"> {{blog.comments.count}} Comments</p> -->
-            {% if blog.author == user %}
+            <!-- Toolbar editing options are visible only for author and superuser -->
+            {% if blog.author == user or user.is_superuser %}
 
             <a class="card-toolbar-options" href="{% url "blog:post_edit" blog.id %}">
               <i class="far fa-edit"></i>
@@ -51,7 +52,7 @@
 
             {% endif %}
             <!-- Only admin can publish drafts -->
-            {% if not blog.published_at and user.is_superuser %}
+            {% if not blog.published_at and user|has_group:"blog_editors" %}
               <a class="card-toolbar-options publish-btn" href="{% url "blog:post_publish" blog.id %}">
                 <i class="fas fa-check"></i>
                 <span>Publish</span>
@@ -64,4 +65,8 @@
     {% endif %}
 
   {% endfor %}
+
+  {% if not blogpost_list %}
+    <p>No Posts here yet. You can create the first one.</p>
+  {% endif %}
 {% endblock body_block %}
