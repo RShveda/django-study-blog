@@ -54,7 +54,7 @@
 
         <!-- TOOLBAR -->
         <!-- Comment owner and post author can get access to comment tollbar -->
-        {% if comment.author == user or object.author == user %}
+        {% if comment.author == user or object.author == user or user|has_group:"blog_editors" %}
         <div class="small mb-2 text-muted card-toolbar">
           {% if comment.author == user %}
           <a class="card-toolbar-options" href="{% url "blog:comment_edit" comment.id %}">

@@ -55,6 +55,7 @@ h1{
   border: none;
   border-color: transparent;
   outline: 0px solid transparent;
+  width: 100%;
 }
 
 /* .postcard {

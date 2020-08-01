@@ -6,10 +6,7 @@
   {% for blog in blogpost_list%}
   <!-- for admin user we show all posts published and not_published, for author we show all published + his/her not published -->
     {% if blog.published_at or user|has_group:"blog_editors" or blog.author == user %}
-
       <div class="card list-card">
-
-
         <div class="card-body">
           <!-- CLICKABLE CARD BODY -->
           <a class="postcard" href="{% url "blog:post_details" blog.id %}">
@@ -34,13 +31,11 @@
             {% endautoescape %}
           </a>
 
-
           <!-- CARD TOOLBAR-->
           <div class="small mb-2 text-muted card-toolbar">
             <span class="card-subtitle">{{blog.comments.count}} Comments</span>
             <!-- Toolbar editing options are visible only for author and superuser -->
             {% if blog.author == user or user.is_superuser %}
-
             <a class="card-toolbar-options" href="{% url "blog:post_edit" blog.id %}">
               <i class="far fa-edit"></i>
               <span>Edit</span>
@@ -49,8 +44,8 @@
               <i class="far fa-trash-alt"></i>
               <span>Delete</span>
             </a>
-
             {% endif %}
+
             <!-- Only admin can publish drafts -->
             {% if not blog.published_at and user|has_group:"blog_editors" %}
               <a class="card-toolbar-options publish-btn" href="{% url "blog:post_publish" blog.id %}">
@@ -63,7 +58,6 @@
         </div>
       </div>
     {% endif %}
-
   {% endfor %}
 
   {% if not blogpost_list %}

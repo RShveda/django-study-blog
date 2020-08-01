@@ -6,8 +6,9 @@
     {% csrf_token %}
 
     <div class="card editor-area">
+      <h3 class="card-title editor-title">{{ form.title }}</h3>
       <div class="card-body">
-        <h5 class="card-title editor-title">{{ form.title }}</h5>
+
         {{ form.body_text}}
       </div>
       <input class="card-toolbar-options" type="submit" value="Save">

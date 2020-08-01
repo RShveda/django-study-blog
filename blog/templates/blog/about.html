@@ -2,16 +2,31 @@
 {% load blog_extras %}
 {% block body_block %}
 
-  <h1>This is about page</h1>
-  <h2>Welcome {{user}}!</h2>
-  <p>Staff? {{user.is_superuser}}</p>
-  <p>{{user.groups.all}}</p>
-  <p>You have following permissions: {{perms.blog}}</p>
-  Is Editor?
-  {% if user|has_group:"blog_editors" %}
-  <p>This is blog editor</p>
-  {% endif %}
+<h1>This is about page!</h1>
+<div class="card">
+  <div class="card-body">
+    <p>This blog support two type of users:</p>
+    <h3>Regular Users can:</h3>
+    <ul>
+      <li>View list of all "Published" blogposts</li>
+      <li>View list of their own "Published" posts and "Drafts"</li>
+      <li>Create new blogpost "Drafts" (which then need to be approved and published by Admin)</li>
+      <li>Edit/Delete their own blogposts</li>
+      <li>Comment blogposts</li>
+      <li>Edit/Delete their own comments</li>
+    </ul>
+    <p>You may register a new user via SignUp page here <span> <a class="btn btn-outline-secondary btn-sm" href="{% url "blog:signup" %}">Signup</a></span></p>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <a href="{% url "blog:post_list" %}">Posts</a>
+    <h3>Admin User can:</h3>
+    <ul>
+      <li>Do everything that a Regular user can</li>
+      <li>Publish post "Drafts"</li>
+      <li>Delete other user's blogposts</li>
+      <li>Delete other user's comments</li>
+    </ul>
+    <p>Admin user credentials: admin/newpass1234</p>
+
+  </div>
+</div>
+
 {% endblock body_block %}
