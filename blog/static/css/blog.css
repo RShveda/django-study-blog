@@ -6,6 +6,8 @@ body {
 h1{
   margin-top: 15px;
 }
+
+/* Navbar */
 .navbar-container {
   font-family: 'Play', sans-serif;
   font-size: 1.3em;
@@ -15,18 +17,72 @@ h1{
   font-size: 1.3em;
 }
 
+/* BODY */
 .blogbody {
   font-family: 'Noto Serif JP', serif;
 }
 
-/* make div clickable */
+.card {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Blog cards */
+.list-card{
+  width: 75%;
+}
+
+.badges-area {
+  float:right;
+}
+
 .postcard, .postcard:hover, .postcard:focus {
     text-decoration: none;
     color: inherit;
 }
 
+.list-card:hover {
+  border: black solid 1px;
+}
+
+.publish-btn {
+  float:right;
+}
+
+/* Blog/Comment toolbar */
+.card-toolbar{
+  margin-top: 15px;
+}
+
+.card-toolbar-options{
+  padding: 2px 3px 4px 4px;
+  margin: 1px;
+  border-radius: 2px;
+  color: #6c757d;
+}
+
+.card-toolbar-options:hover{
+  text-decoration: none;
+  color:inherit;
+  background-color: #6c757d36;
+}
+
+/* Editor */
 .editable{
     outline: 0px solid transparent;
+}
+
+.editor-title {
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.title-input{
+  border: none;
+  border-color: transparent;
+  outline: 0px solid transparent;
+  width: 100%;
 }
 
 .editor-area {
@@ -43,60 +99,4 @@ h1{
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #6c757d78;
-}
-
-.editor-title {
-  border-bottom: 1px solid black;
-  padding-bottom: 5px;
-  margin-bottom: 5px;
-}
-
-.title-input{
-  border: none;
-  border-color: transparent;
-  outline: 0px solid transparent;
-  width: 100%;
-}
-
-/* .postcard {
-  display: inline-block;
-  width: 75%;
-} */
-
-.card {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.badges-area {
-  float:right;
-}
-
-.publish-btn {
-  float:right;
-}
-
-.list-card{
-  width: 75%;
-}
-
-.list-card:hover {
-  border: black solid 1px;
-}
-
-.card-toolbar{
-  margin-top: 15px;
-}
-
-.card-toolbar-options{
-  padding: 2px 3px 4px 4px;
-  margin: 1px;
-  border-radius: 2px;
-  color: #6c757d;
-}
-
-.card-toolbar-options:hover{
-  text-decoration: none;
-  color:inherit;
-  background-color: #6c757d36;
 }
